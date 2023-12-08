@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import pageobject.constants.SectionName;
 
 import static org.junit.Assert.assertEquals;
@@ -18,27 +19,28 @@ public class ParameterizedDesignerSectionTest extends BaseTest{
 
     private final SectionName sectionName;
     private By button;
-    private String sectionText;
+    private String selected;
 
-    public ParameterizedDesignerSectionTest(SectionName sectionName, By button, String sectionText){
+    public ParameterizedDesignerSectionTest(SectionName sectionName, By button, String selected){
         this.sectionName = sectionName;
         this.button = button;
-        this.sectionText = sectionText;
+        this.selected = selected;
     }
 
-    @Parameterized.Parameters(name = "{index}: sectionName={0}, button={1}, sectionText={2}")
+    @Parameterized.Parameters(name = "{index}: sectionName={0}, button={1}, selected={2}")
     public static Object[][] getData(){
         return new Object[][]{
-                {BUNS, SECTION_BUNS_BUTTON, "Булки"},
-                {SAUCES, SECTION_SAUCES_BUTTON, "Соусы"},
-                {FILLINGS, SECTION_FILLINGS_BUTTON, "Начинки"}
+                {BUNS, SECTION_BUNS_BUTTON, SECTION_BUNS_ATTRIBUTE},
+                {SAUCES, SECTION_SAUCES_BUTTON, SECTION_SAUCES_ATTRIBUTE},
+                {FILLINGS, SECTION_FILLINGS_BUTTON, SECTION_FILLINGS_ATTRIBUTE}
         };
     }
 
     void chooseSection(SectionName sectionName){
         switch(sectionName){
             case BUNS:
-                homePage.sectionFillingsClick();
+                homePage.sectionSaucesClick();
+                homePage.waitForLoadMenuContainerData();
                 homePage.sectionBunsClick();
                 break;
             case SAUCES:
@@ -56,7 +58,8 @@ public class ParameterizedDesignerSectionTest extends BaseTest{
     public void parametrizationDesignerTest(){
         homePage.waitForLoadMainPageData();
         chooseSection(sectionName);
-        String chosenSection = driver.findElement(button).getText();
-        assertEquals(chosenSection, sectionText);
+        WebElement chosenSection = driver.findElement(button);
+        String nameOfTheClass = chosenSection.getAttribute("class");
+        assertEquals(selected, nameOfTheClass);
     }
 }

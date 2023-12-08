@@ -21,6 +21,10 @@ public class TextsMessagesButtons {
     public static final By SECTION_SAUCES_BUTTON = By.xpath("//*[text()='Соусы']//parent::div[contains(@class, 'tab_tab')]");
     public static final By SECTION_FILLINGS_BUTTON = By.xpath("//*[text()='Начинки']//parent::div[contains(@class, 'tab_tab')]");
     public static final By AUTHORIZE_BUTTON = By.xpath(".//button[contains(text(), 'Войти')]");
+    public static final String SECTION_BUNS_ATTRIBUTE = "tab_tab__1SPyG  pt-4 pr-10 pb-4 pl-10 noselect";
+    public static final String SECTION_SAUCES_ATTRIBUTE = "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect";
+    public static final String SECTION_FILLINGS_ATTRIBUTE = "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect";
+
 
     //TEXTS
     public static final String WRONG_PASSWORD_ERROR_TEXT = "Некорректный пароль";

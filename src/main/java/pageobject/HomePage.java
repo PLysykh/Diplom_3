@@ -15,6 +15,7 @@ public class HomePage {
     private WebDriver driver;
 
     private final By homePageHeader = By.xpath(".//main[contains(@class, 'componentContainer')]");
+    private final By menuContainer = By.xpath("//*[contains(@class, 'menuContainer')]");
 
     public HomePage(WebDriver driver){
         this.driver = driver;
@@ -24,6 +25,12 @@ public class HomePage {
     public void waitForLoadMainPageData() {
         new WebDriverWait(driver, Duration.ofMillis(5000))
                 .until(ExpectedConditions.visibilityOfElementLocated(homePageHeader));
+    }
+
+    @Step("Waiting for Menu Container to be loaded")
+    public void waitForLoadMenuContainerData() {
+        new WebDriverWait(driver, Duration.ofMillis(5000))
+                .until(ExpectedConditions.visibilityOfElementLocated(menuContainer));
     }
 
     @Step("Clicking on account button on Main Page")
